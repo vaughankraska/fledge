@@ -1,0 +1,27 @@
+[project]
+name = "fledge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bitsandbytes>=0.45.2",
+    "fedn>=0.23.1",
+    "peft>=0.14.0",
+    "scipy>=1.15.2",
+    "torch>=2.6.0",
+]
+
+[project.scripts]
+main = "fledge:main"
+apply-lofq = "fledge.loftq:quantize_and_save"
+
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
