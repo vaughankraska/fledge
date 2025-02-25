@@ -1,6 +1,7 @@
 import argparse
 import uuid
 import os
+import time
 from typing import Optional
 from fedn.network.clients.fedn_client import ConnectToApiResult, FednClient
 
@@ -9,6 +10,7 @@ class FEDnNamespace(argparse.Namespace):
     api_url: str
     api_port: int
     token: str
+    client_name: str
 
 
 def parse_args() -> FEDnNamespace:
@@ -32,6 +34,13 @@ def parse_args() -> FEDnNamespace:
         default=os.environ.get("FEDN_TOKEN"),
         required=os.environ.get("FEDN_TOKEN") is None,
         help="The FEDn API Token. Falls back to .env's FEDN_TOKEN",
+    )
+    parser.add_argument(
+        "--client-name",
+        type=str,
+        default=os.environ.get("CLIENT_NAME", f"c-{int(time.time() * 1000)}"),
+        required=False,
+        help="The name of the client. Falls back to .env's CLIENT_NAME and defaults to 'c-{time.time() * 1000}'",
     )
 
     args = parser.parse_args()

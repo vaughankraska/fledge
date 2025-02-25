@@ -9,7 +9,7 @@ def main():
     print("[*] Connecting Edge Client:")
     fedn_args = parse_args()
     connnect_fedn_client(
-        "test_client_0",
+        fedn_args.client_name,
         api_url=fedn_args.api_url,
         token=fedn_args.token,
         api_port=fedn_args.api_port,
