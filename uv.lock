@@ -228,7 +228,7 @@ wheels = [
 
 [[package]]
 name = "fedn"
-version = "0.23.1"
+version = "0.23.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -254,9 +254,9 @@ dependencies = [
     { name = "urllib3" },
     { name = "virtualenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/15/82/5fce460ab6607a140d0d950e1d3d48f613a4d52612bb6cec5c1a2a18d411/fedn-0.23.1.tar.gz", hash = "sha256:a438e7585c0f0be4dc1296e8c64b2ef82b1be1afc1f4f3d6698afc50dac2d4cc", size = 151577 }
+sdist = { url = "https://files.pythonhosted.org/packages/56/95/1750695b675b796e73b09d60e6637db584004094392926a14789e2e3e882/fedn-0.23.3.tar.gz", hash = "sha256:267cefa652a338971067af8e879f3a42bed6fe42896c97d96c2017950a41812c", size = 151612 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0a/69/0527094f0c5abaedac13a377cecde5fec724e10dc82c95da774dd6510f18/fedn-0.23.1-py3-none-any.whl", hash = "sha256:2d4fb781f0e9e3d73c4c34f2c464e0e2b21d30eac013b10829747428291b8b73", size = 218548 },
+    { url = "https://files.pythonhosted.org/packages/65/ef/6b5cd1ccecd5397285290f6f0f2d07cdbd14651c70e24848f3ec78a2af78/fedn-0.23.3-py3-none-any.whl", hash = "sha256:003518432685567ab8b154b9c3c1c9d4063fb3c17896a661e6dbca2a1df2fea5", size = 218570 },
 ]
 
 [[package]]
@@ -292,6 +292,7 @@ dependencies = [
     { name = "bitsandbytes" },
     { name = "fedn" },
     { name = "peft" },
+    { name = "python-dotenv" },
     { name = "scipy" },
     { name = "torch" },
 ]
@@ -304,8 +305,9 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "bitsandbytes", specifier = ">=0.45.2" },
-    { name = "fedn", specifier = ">=0.23.1" },
+    { name = "fedn", specifier = ">=0.23.3" },
     { name = "peft", specifier = ">=0.14.0" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "scipy", specifier = ">=1.15.2" },
     { name = "torch", specifier = ">=2.6.0" },
 ]
@@ -1000,6 +1002,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3", size = 342432 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427", size = 229892 },
+]
+
+[[package]]
+name = "python-dotenv"
+version = "1.0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bc/57/e84d88dfe0aec03b7a2d4327012c1627ab5f03652216c63d49846d7a6c58/python-dotenv-1.0.1.tar.gz", hash = "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca", size = 39115 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6a/3e/b68c118422ec867fa7ab88444e1274aa40681c606d59ac27de5a5588f082/python_dotenv-1.0.1-py3-none-any.whl", hash = "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a", size = 19863 },
 ]
 
 [[package]]

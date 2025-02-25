@@ -23,29 +23,29 @@ def test_quantize_and_save():
 
 
 def test_reload_quantized():
-    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     torch.cuda.set_device(device)
 
     base_model_dir, lora_dir = quantize_and_save(TEST_BASE_MODEL, iter=1)
     print("Loading from: ", base_model_dir)
     base_model = AutoModelForCausalLM.from_pretrained(
-         base_model_dir,
-         torch_dtype=torch.bfloat16,
-         quantization_config=BitsAndBytesConfig(
-             load_in_4bit=True,
-             bnb_4bit_compute_dtype=torch.bfloat16,
-             bnb_4bit_use_double_quant=False,
-             bnb_4bit_quant_type='nf4',
-         ),
+        base_model_dir,
+        torch_dtype=torch.bfloat16,
+        quantization_config=BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=False,
+            bnb_4bit_quant_type="nf4",
+        ),
     )
 
     peft_model = PeftModel.from_pretrained(
-         model=base_model,
-         model_id=base_model_dir,
-         subfolder="loft_init",
-         is_trainable=True,
-         low_cpu_mem_usage=True,
-         )
+        model=base_model,
+        model_id=base_model_dir,
+        subfolder="loft_init",
+        is_trainable=True,
+        low_cpu_mem_usage=True,
+    )
 
     peft_model = peft_model.to(device)
 
@@ -76,27 +76,27 @@ def test_reload_quantized():
 
 
 def test_reload_quantized_from_hub():
-    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     torch.cuda.set_device(device)
 
     base_model = AutoModelForCausalLM.from_pretrained(
-         TEST_LOFTQ_MODEL,
-         torch_dtype=torch.bfloat16,
-         quantization_config=BitsAndBytesConfig(
-             load_in_4bit=True,
-             bnb_4bit_compute_dtype=torch.bfloat16,
-             bnb_4bit_use_double_quant=False,
-             bnb_4bit_quant_type='nf4',
-         ),
+        TEST_LOFTQ_MODEL,
+        torch_dtype=torch.bfloat16,
+        quantization_config=BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=False,
+            bnb_4bit_quant_type="nf4",
+        ),
     )
 
     peft_model = PeftModel.from_pretrained(
-         model=base_model,
-         model_id=TEST_LOFTQ_MODEL,
-         subfolder="loft_init",
-         is_trainable=True,
-         low_cpu_mem_usage=True,
-         )
+        model=base_model,
+        model_id=TEST_LOFTQ_MODEL,
+        subfolder="loft_init",
+        is_trainable=True,
+        low_cpu_mem_usage=True,
+    )
 
     peft_model = peft_model.to(device)
 

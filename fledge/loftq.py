@@ -137,7 +137,7 @@ def quantize_and_save(
     iter: Optional[int] = 3,
     rank: Optional[int] = 16,
     save_dir: Optional[str] = "./model_zoo/loftq/",
-    do_print: bool = False
+    do_print: bool = False,
 ) -> Tuple[str, str]:
     # Download weights and configure LoRA
     tokenizer = AutoTokenizer.from_pretrained(
@@ -244,7 +244,7 @@ if __name__ == "__main__":
         args.iter,
         args.rank,
         args.save_dir,
-        args.print
+        args.print,
     )
 
 # example command:
