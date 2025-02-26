@@ -1,4 +1,8 @@
 import argparse
+import numpy as np
+import collections
+import io
+import torch
 import uuid
 import os
 import time
@@ -55,7 +59,39 @@ def get_api_url(api_url: str, api_port: int):
     return url
 
 
-def on_train(in_model):
+def on_train(in_model: io.BytesIO, *args, **kwargs):
+    print("in_model:", in_model)
+    print("args:", args)
+    in_model.seek(0)
+
+    class Net(torch.nn.Module):
+        def __init__(self):
+            super(Net, self).__init__()
+            self.fc1 = torch.nn.Linear(784, 64)
+            self.fc2 = torch.nn.Linear(64, 32)
+            self.fc3 = torch.nn.Linear(32, 10)
+
+        def forward(self, x):
+            x = torch.nn.functional.relu(self.fc1(x.reshape(x.size(0), 784)))
+            x = torch.nn.functional.dropout(x, p=0.5, training=self.training)
+            x = torch.nn.functional.relu(self.fc2(x))
+            x = torch.nn.functional.log_softmax(self.fc3(x), dim=1)
+            return x
+    model = Net()
+
+    # TODO: comeback when you have implemented an actual split model
+    np_params = np.load(in_model, allow_pickle=True)
+    params_dict = zip(model.state_dict().keys(), np_params.files)
+    for key, val in params_dict:
+        print(f"key:{key}, val:", np_params[val])
+        print(type(key))
+        print(type(val))
+    state_dict = collections.OrderedDict(
+            {key: torch.tensor(np_params[x]) for key, x in params_dict}
+            )
+    model.load_state_dict(state_dict, strict=True)
+    print(model)
+
     training_metadata = {
         "num_examples": 1,
         "batch_size": 1,
@@ -71,7 +107,10 @@ def on_train(in_model):
     return out_model, metadata
 
 
-def on_validate(in_model):
+def on_validate(in_model, *args, **kwargs):
+    print("in_model", in_model)
+    print(type(in_model))
+    print("kwargs", kwargs)
     # Calculate metrics here...
     metrics = {
         "test_accuracy": 0.9,
@@ -82,7 +121,10 @@ def on_validate(in_model):
     return metrics
 
 
-def on_predict(in_model):
+def on_predict(in_model, *args, **kwargs):
+    print("in_model", in_model)
+    print(type(in_model))
+    print("kwargs", kwargs)
     # Do your prediction here...
     raise NotImplementedError("on_predict not supported.")
     prediction = {
